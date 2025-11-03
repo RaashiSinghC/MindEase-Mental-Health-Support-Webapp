@@ -1,3 +1,4 @@
+const API_BASE = window.API_BASE || 'https://mindease-backend-s59o.onrender.com/api';
 document.addEventListener('DOMContentLoaded', function() {
     if (!checkAuth()) return;
     
@@ -25,7 +26,7 @@ async function saveJournalEntry() {
     }
     
     try {
-        const response = await fetch('http://localhost:5000/api/journal/entry', {
+        const response = await fetch(`${API_BASE}/journal/entry`, {
             method: 'POST',
             headers: getAuthHeaders(),
             body: JSON.stringify({
@@ -153,4 +154,5 @@ async function loadJournalAnalytics() {
     } catch (error) {
         console.error('Error loading analytics:', error);
     }
+
 }
