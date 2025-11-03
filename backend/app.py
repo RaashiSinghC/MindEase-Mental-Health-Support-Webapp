@@ -33,7 +33,18 @@ else:
 from models import db
 db.init_app(app)
 
-CORS(app)
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "http://localhost:3000",
+            "http://localhost:5000", 
+            "https://mindeasemhs.netlify.app",
+            "https://*.netlify.app"
+        ],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization", "X-Requested-With"]
+    }
+})
 
 # ✅ IMPORTANT: Initialize JWTManager with the app
 jwt = JWTManager(app)
@@ -115,6 +126,7 @@ if __name__ == '__main__':
     print(f"🚀 Starting MindEase server on port {port}")
     print(f"🔗 Database: {os.environ.get('DATABASE_URL', 'Not set')}")
     app.run(host='0.0.0.0', port=port, debug=debug)
+
 
 
 
