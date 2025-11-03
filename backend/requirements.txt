@@ -9,4 +9,4 @@ python-dotenv==1.0.0
 psycopg2-binary==2.9.7
 gunicorn==21.2.0
 Werkzeug==2.3.7
-numpy==1.21.6
+numpy==1.26.4
