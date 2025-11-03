@@ -1,3 +1,4 @@
+const API_BASE = window.API_BASE || 'https://mindease-backend-s59o.onrender.com/api';
 // Check if user is logged in
 function checkAuth() {
     const token = localStorage.getItem('token');
@@ -32,7 +33,7 @@ function loadDashboardData() {
 // Load recent mood entries for dashboard
 async function loadRecentMoodEntries() {
     try {
-        const response = await fetch('http://localhost:5000/api/mood/history', {
+        const response = await fetch(`${API_BASE}/mood/history`, {
             headers: getAuthHeaders()
         });
         
@@ -143,4 +144,5 @@ function updateGamePreview(progress) {
     if (previewLevel) previewLevel.textContent = progress.level;
     if (previewPoints) previewPoints.textContent = progress.points;
     if (previewStreak) previewStreak.textContent = `${progress.streak_days} days`;
+
 }
