@@ -108,11 +108,13 @@ def health_check():
         "database": "Connected",
         "tables": 5
     })
-
+# ✅ ADD THIS AT THE VERY END OF app.py
 if __name__ == '__main__':
-    print("🚀 Starting MindEase backend server...")
-    print("📊 Database: PostgreSQL 17 - Connected")
-    print("🔐 JWT: Initialized")
-    print("🔗 API available at: http://localhost:5000")
+    port = int(os.environ.get('PORT', 10000))
+    debug = os.environ.get('DEBUG', 'False').lower() == 'true'
+    print(f"🚀 Starting MindEase server on port {port}")
+    print(f"🔗 Database: {os.environ.get('DATABASE_URL', 'Not set')}")
+    app.run(host='0.0.0.0', port=port, debug=debug)
 
-    app.run(debug=True, port=5000)
+
+
