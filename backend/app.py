@@ -32,7 +32,13 @@ else:
 # Initialize extensions
 from models import db
 db.init_app(app)
-
+# Initialize database tables
+with app.app_context():
+    try:
+        db.create_all()
+        print("✅ Database tables created successfully!")
+    except Exception as e:
+        print(f"❌ Database error: {e}")
 CORS(app, resources={
     r"/api/*": {
         "origins": [
@@ -126,6 +132,7 @@ if __name__ == '__main__':
     print(f"🚀 Starting MindEase server on port {port}")
     print(f"🔗 Database: {os.environ.get('DATABASE_URL', 'Not set')}")
     app.run(host='0.0.0.0', port=port, debug=debug)
+
 
 
 
