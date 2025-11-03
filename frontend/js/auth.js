@@ -1,5 +1,5 @@
 // API Base URL
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = window.API_BASE || 'https://mindease-backend-s59o.onrender.com/api';
 
 // Get auth headers for authenticated requests
 function getAuthHeaders() {
@@ -104,4 +104,5 @@ function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userEmail');
     window.location.href = 'index.html';
+
 }
