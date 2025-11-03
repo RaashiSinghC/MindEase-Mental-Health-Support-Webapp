@@ -1,3 +1,4 @@
+const API_BASE = window.API_BASE || 'https://mindease-backend-s59o.onrender.com/api';
 // Game Dashboard JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     if (!checkAuth()) return;
@@ -6,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function loadGameProgress() {
     try {
-        const response = await fetch('http://localhost:5000/api/game/progress', {
+        const response = await fetch(`${API_BASE}/game/progress`, {
             headers: getAuthHeaders()
         });
         
@@ -137,4 +138,5 @@ function viewGameDashboard() {
 
 function viewAnalyticsReport() {
     window.location.href = 'analytics-report.html';
+
 }
