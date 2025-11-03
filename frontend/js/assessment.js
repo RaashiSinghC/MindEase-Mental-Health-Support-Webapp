@@ -1,3 +1,4 @@
+const API_BASE = window.API_BASE || 'https://mindease-backend-s59o.onrender.com/api';
 let currentAssessment = null;
 let currentQuestions = [];
 let currentResponses = [];
@@ -6,6 +7,7 @@ let currentQuestionIndex = 0;
 document.addEventListener('DOMContentLoaded', function() {
     if (!checkAuth()) return;
 });
+
 
 function selectAssessmentType(type) {
     // Update active button
@@ -167,4 +169,5 @@ function takeAnother() {
     document.getElementById('assessmentResults').classList.add('hidden');
     document.getElementById('typeSelection').classList.remove('hidden');
     currentAssessment = null;
+
 }
