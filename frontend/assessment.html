@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Assessment - MindEase</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .assessment-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+        .assessment-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f3f5;
+        }
+        .question-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        .scale-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        .scale-option {
+            padding: 0.8rem;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .scale-option:hover {
+            border-color: var(--primary);
+        }
+        .scale-option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .assessment-type {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        .type-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .type-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        .progress-bar {
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        .result-card {
+            background: #e8f5e8;
+            border-left: 4px solid #5bd75b;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="dashboard.html" class="logo">
+                <span class="logo-icon">🧠</span>
+                <span>MindEase</span>
+            </a>
+            <div class="nav-buttons">
+                <a href="dashboard.html" class="btn btn-outline">Back to Dashboard</a>
+                <button class="btn btn-outline" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="assessment-container">
+        <div class="assessment-header">
+            <h1>Mental Health Assessment</h1>
+            <p>Take a few minutes to check in with your mental wellbeing</p>
+        </div>
+
+        <!-- Assessment Type Selection -->
+        <div id="typeSelection">
+            <div class="assessment-type">
+                <button class="type-btn active" onclick="selectAssessmentType('phq9')">PHQ-9 (Depression)</button>
+                <button class="type-btn" onclick="selectAssessmentType('gad7')">GAD-7 (Anxiety)</button>
+            </div>
+            <button class="btn btn-primary btn-full" onclick="startAssessment()">Start Assessment</button>
+        </div>
+
+        <!-- Assessment Questions -->
+        <div id="assessmentQuestions" class="hidden">
+            <div id="assessmentInfo">
+                <h2 id="assessmentTitle"></h2>
+                <p id="assessmentInstructions"></p>
+            </div>
+
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+            </div>
+
+            <div id="questionsContainer"></div>
+
+            <div class="navigation">
+                <button class="btn btn-outline" onclick="previousQuestion()" id="prevBtn">Previous</button>
+                <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn">Next Question</button>
+                <button class="btn btn-primary" onclick="submitAssessment()" id="submitBtn" style="display: none">Submit Assessment</button>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div id="assessmentResults" class="hidden">
+            <h2>Assessment Complete</h2>
+            <div class="result-card">
+                <h3>Your Results</h3>
+                <p><strong>Total Score:</strong> <span id="resultScore"></span></p>
+                <p><strong>Severity:</strong> <span id="resultSeverity"></span></p>
+                <p><strong>Recommendation:</strong> <span id="resultRecommendation"></span></p>
+            </div>
+            <button class="btn btn-primary" onclick="goToDashboard()">Back to Dashboard</button>
+            <button class="btn btn-outline" onclick="takeAnother()">Take Another Assessment</button>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/assessment.js"></script>
+</body>
+</html>

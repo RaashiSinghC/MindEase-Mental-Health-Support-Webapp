@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Report - MindEase</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .analytics-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .report-period {
+            background: #e6f2ff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        
+        .metric-card h3 {
+            color: #4a90e2;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .metric-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .metric-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .metric-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+        
+        .metric-value {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .recommendations-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .recommendations-section h3 {
+            color: #4a90e2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .recommendation-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #4a90e2;
+        }
+        
+        .trend-up {
+            color: #5bd75b;
+            font-weight: bold;
+        }
+        
+        .trend-down {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .trend-stable {
+            color: #ffa500;
+            font-weight: bold;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-placeholder {
+            background: #f8f9fa;
+            height: 200px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="dashboard.html" class="logo">
+                <span class="logo-icon">🧠</span>
+                <span>MindEase</span>
+            </a>
+            <div class="nav-buttons">
+                <a href="dashboard.html" class="btn btn-outline">Back to Dashboard</a>
+                <button class="btn btn-primary" onclick="generatePDFReport()">Download PDF</button>
+                <button class="btn btn-outline" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="analytics-container">
+        <h1>📊 Your Mental Health Report</h1>
+        
+        <div class="report-period">
+            <p>Report Period: <span id="reportPeriod">Loading...</span></p>
+        </div>
+
+        <div class="chart-container">
+            <h3>📈 Monthly Overview</h3>
+            <div class="chart-placeholder" id="moodChart">
+                Mood Trend Chart - Interactive charts can be added here
+            </div>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>📊 Engagement Metrics</h3>
+                <div id="engagementMetrics" class="loading">
+                    Loading engagement data...
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <h3>😊 Mood Analysis</h3>
+                <div id="moodAnalysis" class="loading">
+                    Loading mood analysis...
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <h3>📖 Journal Insights</h3>
+                <div id="journalInsights" class="loading">
+                    Loading journal insights...
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <h3>🏥 Assessment History</h3>
+                <div id="assessmentHistory" class="loading">
+                    Loading assessment history...
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3>🔄 Weekly Comparison</h3>
+            <div id="weeklyComparison" class="loading">
+                Loading weekly comparison...
+            </div>
+        </div>
+
+        <div class="recommendations-section">
+            <h3>💡 Personalized Recommendations</h3>
+            <div id="recommendationsList" class="loading">
+                Generating personalized recommendations...
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn btn-primary" onclick="generatePDFReport()">📥 Download Full PDF Report</button>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/analytics.js"></script>
+</body>
+</html>

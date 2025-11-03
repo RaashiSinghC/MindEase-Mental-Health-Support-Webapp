@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Mood - MindEase</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .mood-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .mood-options {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            gap: 0.5rem;
+        }
+        .mood-option {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #e0e0e0;
+            background-color: white;
+            flex: 1;
+            min-width: 0;
+        }
+        .mood-option:hover {
+            background: #f0f5ff !important;
+            transform: scale(1.05);
+            border-color: #4a90e2;
+        }
+        .mood-option.selected {
+            background: #e6f2ff !important;
+            border-color: #4a90e2 !important;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+        }
+        .mood-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+        .mood-option.selected .mood-emoji {
+            transform: scale(1.2);
+        }
+        .mood-label {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 1rem 0;
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+        .insights-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .btn-full {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="dashboard.html" class="logo">
+                <span class="logo-icon">🧠</span>
+                <span>MindEase</span>
+            </a>
+            <div class="nav-buttons">
+                <a href="dashboard.html" class="btn btn-outline">Back to Dashboard</a>
+                <button class="btn btn-outline" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="mood-container">
+        <h1>How are you feeling today?</h1>
+        <p>Select your current mood and add any notes about what's influencing it.</p>
+        
+        <div class="mood-options">
+            <div class="mood-option" data-value="1">
+                <div class="mood-emoji">😢</div>
+                <div class="mood-label">Very Sad</div>
+            </div>
+            <div class="mood-option" data-value="2">
+                <div class="mood-emoji">😞</div>
+                <div class="mood-label">Sad</div>
+            </div>
+            <div class="mood-option" data-value="3">
+                <div class="mood-emoji">😐</div>
+                <div class="mood-label">Neutral</div>
+            </div>
+            <div class="mood-option" data-value="4">
+                <div class="mood-emoji">😊</div>
+                <div class="mood-label">Happy</div>
+            </div>
+            <div class="mood-option" data-value="5">
+                <div class="mood-emoji">😁</div>
+                <div class="mood-label">Very Happy</div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="mood-notes">Additional Notes (Optional)</label>
+            <textarea id="mood-notes" placeholder="What's influencing your mood today? Any specific thoughts or events?"></textarea>
+        </div>
+        
+        <div class="button-group">
+            <button class="btn btn-primary btn-full" onclick="saveMood()">Save Mood Entry</button>
+        </div>
+        
+        <div class="insights-card">
+            <h3>Your Mood Insights</h3>
+            <div id="mood-insights">
+                <p>Start tracking your mood to see insights and patterns!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/mood.js"></script>
+</body>
+</html>

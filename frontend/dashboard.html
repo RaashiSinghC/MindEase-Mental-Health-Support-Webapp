@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MindEase</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard {
+            padding: 2rem 0;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .dashboard-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="dashboard.html" class="logo">
+                <div class="logo-icon">🧠</div>
+                <span class="logo-text">MindEase</span>
+            </a>
+            <div class="nav-buttons">
+                <span>Welcome!</span>
+                <button class="btn btn-outline" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container dashboard">
+        <h1>Your Mental Wellness Dashboard</h1>
+        
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h2>Mood Tracking</h2>
+                <p>Track your daily mood and see patterns over time.</p>
+                <button class="btn btn-primary" onclick="window.location.href='mood-tracker.html'">Track Mood</button>
+            </div>
+            
+            <div class="dashboard-card">
+                <h2>AI Therapist</h2>
+                <p>Chat with our AI therapist for support.</p>
+                <button class="btn btn-primary" onclick="window.location.href='chatbot.html'">Start Chat</button>
+            </div>
+            
+            <div class="dashboard-card">
+                <h2>Weekly Assessment</h2>
+                <p>Complete your weekly mental health check-in.</p>
+                <button class="btn btn-primary" onclick="window.location.href='assessment.html'">Take Assessment</button>
+            </div>
+
+            <div class="dashboard-card">
+                <h2>📖 Journal</h2>
+                <p>Write about your thoughts and get emotional insights.</p>
+                <button class="btn btn-primary" onclick="window.location.href='journal.html'">Write in Journal</button>
+            </div>
+            <div class="dashboard-card game-preview">
+                <h2>🎮 Your Journey</h2>
+                <div id="gamePreview">
+                    <p><strong>Level:</strong> <span id="previewLevel">Beginner</span></p>
+                    <p><strong>Points:</strong> <span id="previewPoints">0</span></p>
+                    <p><strong>Streak:</strong> <span id="previewStreak">0 days</span></p>
+                    <button class="btn btn-primary" onclick="viewGameDashboard()">View Progress</button>
+                </div>
+            </div>
+
+            <div class="dashboard-card analytics-preview">
+                <h2>📊 Monthly Report</h2>
+                <p>Get detailed insights into your mental health journey</p>
+                <button class="btn btn-primary" onclick="viewAnalyticsReport()">View Full Report</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

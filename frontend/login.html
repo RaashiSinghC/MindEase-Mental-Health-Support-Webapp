@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - MindEase</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🧠</div>
+                <span class="logo-text">MindEase</span>
+            </a>
+        </nav>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>Sign In</h1>
+            <p class="auth-subtitle">Enter your credentials to access your MindEase account</p>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" placeholder="your.email@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                    <a href="forgot-password.html" class="forgot-password">Forgot your password?</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="signup.html">Create one now</a></p>
+            </div>
+            
+            <div class="security-note">
+                <p>Your mental health data is protected with enterprise-grade security</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

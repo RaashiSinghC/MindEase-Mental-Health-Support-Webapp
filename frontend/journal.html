@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal - MindEase</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .journal-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+        .journal-editor {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+        .journal-analytics {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        .sentiment-indicator {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+        .sentiment-positive {
+            background: #e8f5e8;
+            color: #2ecc71;
+        }
+        .sentiment-negative {
+            background: #ffeaea;
+            color: #e74c3c;
+        }
+        .sentiment-neutral {
+            background: #f0f0f0;
+            color: #7f8c8d;
+        }
+        .emotion-tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: #e6f2ff;
+            color: var(--primary);
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+        }
+        .journal-entries {
+            margin-top: 2rem;
+        }
+        .journal-entry {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+        .entry-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .entry-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin: 0;
+        }
+        .entry-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .entry-content {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .entry-analysis {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        .analytics-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .analytics-card h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--dark);
+        }
+        .word-count {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="dashboard.html" class="logo">
+                <span class="logo-icon">🧠</span>
+                <span>MindEase</span>
+            </a>
+            <div class="nav-buttons">
+                <a href="dashboard.html" class="btn btn-outline">Back to Dashboard</a>
+                <button class="btn btn-outline" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="journal-container">
+        <!-- Journal Editor -->
+        <div class="journal-editor">
+            <h1>📖 Your Journal</h1>
+            <p>Write freely about your thoughts, feelings, and experiences.</p>
+            
+            <form id="journalForm">
+                <div class="form-group">
+                    <label for="entryTitle">Title (Optional)</label>
+                    <input type="text" id="entryTitle" placeholder="How I'm feeling today...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="entryContent">Your Thoughts</label>
+                    <textarea id="entryContent" placeholder="Write anything that's on your mind... This is your private space for reflection."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Save Journal Entry</button>
+            </form>
+
+            <!-- Recent Entries -->
+            <div class="journal-entries">
+                <h3>Recent Entries</h3>
+                <div id="entriesList">
+                    <p>No journal entries yet. Start writing!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Journal Analytics -->
+        <div class="journal-analytics">
+            <h3>📊 Journal Insights</h3>
+            
+            <div class="analytics-card">
+                <h4>Writing Stats</h4>
+                <div class="word-count" id="totalWords">0</div>
+                <p>Total Words Written</p>
+            </div>
+            
+            <div class="analytics-card">
+                <h4>Sentiment Analysis</h4>
+                <div id="sentimentChart">
+                    <p>Write more to see sentiment patterns</p>
+                </div>
+            </div>
+            
+            <div class="analytics-card">
+                <h4>Common Emotions</h4>
+                <div id="emotionsList">
+                    <p>Your emotional themes will appear here</p>
+                </div>
+            </div>
+            
+            <div class="analytics-card">
+                <h4>Writing Patterns</h4>
+                <div id="writingPatterns">
+                    <p>Patterns emerge as you write more</p>
+                </div>
+            </div>
+            
+            <button class="btn btn-outline btn-full" onclick="loadJournalAnalytics()">Refresh Insights</button>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/journal.js"></script>
+</body>
+</html>
