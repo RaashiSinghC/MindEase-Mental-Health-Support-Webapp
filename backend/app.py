@@ -14,12 +14,25 @@ app = Flask(__name__)
 # Basic configuration
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'mindease-super-secret-key-2024')
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'mindease-jwt-secret-key-2024')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# ✅ ADD THIS DATABASE CONFIGURATION SECTION
+database_url = os.getenv('DATABASE_URL')
+if database_url:
+    # Handle Render's PostgreSQL URL format
+    if database_url.startswith('postgres://'):
+        database_url = database_url.replace('postgres://', 'postgresql://', 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+    print("🔗 Using PostgreSQL database from DATABASE_URL")
+else:
+    # Fallback for local development
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local_database.db'
+    print("🔧 Using SQLite database for local development")
 
 # Initialize extensions
 from models import db
 db.init_app(app)
+
 CORS(app)
 
 # ✅ IMPORTANT: Initialize JWTManager with the app
@@ -101,4 +114,5 @@ if __name__ == '__main__':
     print("📊 Database: PostgreSQL 17 - Connected")
     print("🔐 JWT: Initialized")
     print("🔗 API available at: http://localhost:5000")
+
     app.run(debug=True, port=5000)
