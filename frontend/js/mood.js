@@ -1,3 +1,4 @@
+const API_BASE = window.API_BASE || 'https://mindease-backend-s59o.onrender.com/api';
 let selectedMood = null;
 
 // Initialize mood selection
@@ -53,7 +54,7 @@ async function saveMood() {
 
     try {
         console.log('Sending mood data to server...');
-        const response = await fetch('http://localhost:5000/api/mood/entry', {
+        const response = await fetch(`${API_BASE}/mood/entry`, {
             method: 'POST',
             headers: getAuthHeaders(),
             body: JSON.stringify(moodData)
@@ -151,4 +152,5 @@ function checkAuth() {
         return false;
     }
     return true;
+
 }
