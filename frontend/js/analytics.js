@@ -1,9 +1,10 @@
+const API_BASE = window.API_BASE || 'https://mindease-backend-s59o.onrender.com/api';
 // Analytics Report JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     if (!checkAuth()) return;
     loadAnalyticsReport();
 });
-const API_BASE = window.API_BASE || 'https://mindease-backend-s59o.onrender.com/api';
+
 
 async function loadAnalyticsReport() {
     try {
@@ -199,3 +200,4 @@ function generatePDFReport() {
     window.print();
 
 }
+
