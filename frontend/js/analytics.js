@@ -3,10 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!checkAuth()) return;
     loadAnalyticsReport();
 });
+const API_BASE = window.API_BASE || 'https://mindease-backend-s59o.onrender.com/api';
 
 async function loadAnalyticsReport() {
     try {
-        const response = await fetch('http://localhost:5000/api/analytics/comprehensive-report', {
+        const response = await fetch(`${API_BASE}/analytics/comprehensive-report`, {
             headers: getAuthHeaders()
         });
         
@@ -196,4 +197,5 @@ function displayRecommendations(recommendations) {
 function generatePDFReport() {
     alert('PDF generation would be implemented here! For now, you can print this page.');
     window.print();
+
 }
