@@ -1,3 +1,4 @@
+const API_BASE = window.API_BASE || 'https://mindease-backend-s59o.onrender.com/api';
 // Enhanced Chat functionality
 document.addEventListener('DOMContentLoaded', function() {
     if (!checkAuth()) return;
@@ -23,7 +24,7 @@ async function sendMessage() {
     showTypingIndicator();
     
     try {
-        const response = await fetch('http://localhost:5000/api/chat/send', {
+        const response = await fetch(`${API_BASE}/chat/send`, {
             method: 'POST',
             headers: getAuthHeaders(),
             body: JSON.stringify({
@@ -159,4 +160,5 @@ function showQuickReplies() {
     if (quickReplies) {
         quickReplies.style.display = quickReplies.style.display === 'none' ? 'flex' : 'none';
     }
+
 }
